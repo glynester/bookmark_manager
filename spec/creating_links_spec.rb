@@ -8,8 +8,8 @@ feature 'Adding new links' do
     click_button('Save')
     expect(current_path).to eq '/links'
 
-    with 'ul#links' do
-      expect(page).to have_content('This is Facebook')
+    within 'ul#links' do
+      expect(page).to have_content('Facebook')
     end
   end
 end
