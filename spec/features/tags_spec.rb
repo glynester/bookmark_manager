@@ -13,16 +13,16 @@ end
 
 
 feature "filter links by tag" do
-  
+
   before(:each) do
     Link.create(url: 'http://www.abc.com', title: 'ABC', tags: [Tag.first_or_create(name: 'news')])
     Link.create(url: 'http://www.google.com', title: 'Google', tags: [Tag.first_or_create(name: 'search')])
     Link.create(url: 'http://www.sport.com', title: 'Howzatt', tags: [Tag.first_or_create(name: 'cricket')])
     Link.create(url: 'http://www.onedayint.com', title: 'Hit for 6', tags: [Tag.first_or_create(name: 'cricket')])
   end
-  
+
   scenario "return link which has searched tag" do
-    visit '/tags/bubbles'
+    visit '/tags/cricket'
 
     expect(page.status_code).to eq(200)
     within 'ul#links' do
@@ -32,5 +32,5 @@ feature "filter links by tag" do
       expect(page).to have_content('Hit for 6')
     end
   end
-    
+
 end
