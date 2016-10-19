@@ -1,6 +1,6 @@
 require 'data_mapper'
 require 'dm-postgres-adapter'
-require_relative '../app.rb'
+# require_relative '../app.rb'
 
 class Link
   include DataMapper::Resource
