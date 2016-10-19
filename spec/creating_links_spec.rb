@@ -12,6 +12,7 @@ feature 'Adding new links' do
       expect(page).to have_content('Facebook')
     end
   end
+end
 
 
   feature 'Adding a single tag to a link' do
@@ -25,4 +26,15 @@ feature 'Adding new links' do
       expect(link.tags.map(&:name)).to include('News')
     end
   end
-end
+
+  feature 'Adding multiple tags to a link' do
+    scenario 'adding tags' do
+      visit '/links/new'
+      fill_in('title', with: "Google")
+      fill_in('url', with: "wwww.google.co.uk")
+      fill_in('tags', with: "Search Maps")
+      click_button('Save')
+      link = Link.first
+      expect(link.tags.map(&:name)).to include('Search', 'Maps')
+    end
+  end
