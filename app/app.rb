@@ -47,7 +47,7 @@ class BookmarkManager < Sinatra::Base
       session[:user_id] = @user.id
       redirect '/links'
     else
-      flash.now[:notice] = 'Passwords do no match, please try again'
+      flash.now[:notice] = 'Please ensure you have used a valid email address and your passwords match'
       erb :'users/new'
     end
   end

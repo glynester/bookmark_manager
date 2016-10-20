@@ -9,6 +9,14 @@ feature 'Sign up' do
   scenario 'password mismatch' do
     expect{ sign_up_wrong }.not_to change(User, :count)
     expect(current_path).to eq '/users'
-    expect(page).to have_content 'Passwords do no match, please try again'
+    expect(page).to have_content 'Please ensure you have used a valid email address and your passwords match'
+  end
+  scenario 'email is nil' do
+    expect{ sign_up_nil }.not_to change(User, :count)
+    expect(current_path).to eq '/users'
+    expect(page).to have_content 'Please ensure you have used a valid email address and your passwords match'
+  end
+  scenario 'I can\'t sign up with and invalid email address' do
+    expect { sign_up_invalid }.to change(User, :count).by(0)
   end
 end
