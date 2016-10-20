@@ -4,18 +4,22 @@ feature 'User sign up' do
   expect(page).to have_content('Welcome, alice@example.com')
   expect(User.first.email).to eq('alice@example.com')
   end
-end
 
-feature 'User sign up' do
   scenario 'rejects the user if confirmation password does not match' do
     expect { sign_up(password_confirmation: 'wrong_password') }.not_to change(User, :count)
     expect(current_path).to eq('/users')
     expect(page).to have_content('Password and confirmation password do not match')
   end
-end
 
-feature 'User sign up' do
   scenario 'adds the user if matching confirmation password' do
     expect { sign_up }.to change(User, :count).by(1)
   end
+
+  scenario "I can't sign up without an email address" do
+    expect { sign_up(email: nil) }.not_to change(User, :count)
+  end
+
+  scenario "I can't sign up with an invalid email address" do
+   expect { sign_up(email: "invalid@email") }.not_to change(User, :count)
+ end
 end
