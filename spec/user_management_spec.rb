@@ -8,5 +8,7 @@ feature 'Sign up' do
   end
   scenario 'password mismatch' do
     expect{ sign_up_wrong }.not_to change(User, :count)
+    expect(current_path).to eq '/users'
+    expect(page).to have_content 'Passwords do no match, please try again'
   end
 end
