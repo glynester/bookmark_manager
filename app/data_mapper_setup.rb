@@ -10,4 +10,4 @@ require_relative '../models/tag'
 #GLENN'S CONNECTION STRING
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://postgres:password@localhost/bookmark_manager_#{ENV['RACK_ENV']}")
 DataMapper.finalize
-DataMapper.auto_upgrade!
+#DataMapper.auto_upgrade!
