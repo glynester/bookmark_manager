@@ -30,3 +30,17 @@ feature 'Sign up' do
     expect(page).to have_content 'Email is already taken'
   end
 end
+
+feature 'User sign in' do
+
+  let!(:user) do
+    User.create(email: 'glenn@freshstart.com',
+                password: 'lovinit',
+                password_confirmation: 'lovinit')
+  end
+
+  scenario 'signing in with correct credentials' do
+    sign_in(email: user.email, password: user.password)
+    expect(page).to have_content "Welcome, #{user.email}!"
+  end
+end
