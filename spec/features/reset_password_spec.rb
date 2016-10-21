@@ -1,5 +1,8 @@
 feature 'Resetting Password' do
 
+include SessionHelpers
+
+
   before do
     sign_up
     Capybara.reset!
@@ -80,4 +83,9 @@ feature 'Resetting Password' do
     fill_in :password_confirmation, with: password_confirmation
     click_button "Submit"
   end
+
+  # scenario 'it calls the SendRecoverLink service to send the link' do
+  #   recover_password
+  #   expect(SendRecoverLink).to receive(:call).with(user)
+  # end
 end
