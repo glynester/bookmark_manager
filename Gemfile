@@ -8,6 +8,7 @@ gem 'data_mapper'
 gem 'rake'
 gem 'sinatra-flash'
 gem 'sinatra-partial'
+gem 'timecop'
 
 group :test do
   gem 'capybara'

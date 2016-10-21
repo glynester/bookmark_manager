@@ -14,4 +14,8 @@ describe User do
   it 'does not authenticate a user sign in given an incorrect password' do
     expect(User.authenticate(user.email, 'suhfaisudghus')).to be_nil
   end
+
+  it 'saves a password recover token when we generate a token' do
+    expect{user.generate_token}.to change{user.password_token}
+  end
 end
