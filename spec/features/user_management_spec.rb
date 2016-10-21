@@ -3,7 +3,7 @@ require 'spec_helper'
 feature 'Sign up' do
   scenario 'create a new user account' do
     expect { sign_up_right }.to change(User, :count).by(1)
-    expect(page).to have_content('Welcome, bob@bobross.com!')
+    expect(page).to have_content('Welcome, bob@bobross.com')
     expect(User.first.email).to eq('bob@bobross.com')
   end
 
@@ -41,6 +41,23 @@ feature 'User sign in' do
 
   scenario 'signing in with correct credentials' do
     sign_in(email: user.email, password: user.password)
-    expect(page).to have_content "Welcome, #{user.email}!"
+    expect(page).to have_content "Welcome, #{user.email}"
   end
+end
+
+feature 'User signs out' do
+
+  before(:each) do
+    User.create(email: 'test@test.com',
+                password: 'test',
+                password_confirmation: 'test')
+  end
+
+  scenario 'while being signed in' do
+    sign_in(email: 'test@test.com', password: 'test')
+    click_button 'Sign out'
+    expect(page).to have_content('goodbye')
+    expect(page).not_to have_content('Welcome, test@test.com')
+  end
+
 end
